@@ -45,7 +45,7 @@ export default {
 
         return messages[ctx.rule.name]
           ? messages[ctx.rule.name]
-          : `The field ${context.field} is invalid.`
+          : `The field ${ctx.field} is invalid.`
       },
       validateOnBlur: true,
       validateOnChange: true,
