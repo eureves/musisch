@@ -5,9 +5,15 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@vee-validate/rules':
+    specifier: ^4.11.7
+    version: 4.11.7(vue@3.3.4)
   pinia:
     specifier: ^2.1.6
     version: 2.1.6(vue@3.3.4)
+  vee-validate:
+    specifier: ^4.11.7
+    version: 4.11.7(vue@3.3.4)
   vue:
     specifier: ^3.3.4
     version: 3.3.4
@@ -538,6 +544,14 @@ packages:
       '@types/node': 18.17.17
     dev: true
     optional: true
+
+  /@vee-validate/rules@4.11.7(vue@3.3.4):
+    resolution: {integrity: sha512-XPsh+5f7DZmJQAI2AhCvBeDATve+zZt0q0194p0Wwk2MeqAo+vmThduesmiiUwQw1MUebKOuZcTjtujPcfB8cg==}
+    dependencies:
+      vee-validate: 4.11.7(vue@3.3.4)
+    transitivePeerDependencies:
+      - vue
+    dev: false
 
   /@vitejs/plugin-vue@4.3.4(vite@4.4.9)(vue@3.3.4):
     resolution: {integrity: sha512-ciXNIHKPriERBisHFBvnTbfKa6r9SAesOYXeGDzgegcvy9Q4xdScSHAmKbNT0M3O0S9LKhIf5/G+UYG4NnnzYw==}
@@ -3322,6 +3336,11 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
+  /type-fest@4.3.1:
+    resolution: {integrity: sha512-pphNW/msgOUSkJbH58x8sqpq8uQj6b0ZKGxEsLKMUnGorRcDjrUaLS+39+/ub41JNTwrrMyJcUB8+YZs3mbwqw==}
+    engines: {node: '>=16'}
+    dev: false
+
   /ufo@1.3.0:
     resolution: {integrity: sha512-bRn3CsoojyNStCZe0BG0Mt4Nr/4KF+rhFlnNXybgqt5pXHNFRlqinSoQaTrGyzE4X8aHplSb+TorH+COin9Yxw==}
     dev: true
@@ -3373,6 +3392,16 @@ packages:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
     dev: true
+
+  /vee-validate@4.11.7(vue@3.3.4):
+    resolution: {integrity: sha512-HWnZgOY02mPuAQheaVcKZwahC879YsGNRW4/kkjxeOJ3wu1oruEeomuk+ovCyxTPQoAl1WPHurVJKL1yPGd/WQ==}
+    peerDependencies:
+      vue: ^3.3.4
+    dependencies:
+      '@vue/devtools-api': 6.5.0
+      type-fest: 4.3.1
+      vue: 3.3.4
+    dev: false
 
   /verror@1.10.0:
     resolution: {integrity: sha512-ZZKSmDAEFOijERBLkmYfJ+vmk3w+7hOLYDNkRCuRuMJGEmqYNCNLyBBFwWKVMhfwaEF3WOd0Zlw86U/WC/+nYw==}
