@@ -2,12 +2,23 @@
 // import { RouterLink, RouterView } from 'vue-router'
 import AppHeader from '@/components/AppHeader.vue'
 import AppAuth from '@/components/AppAuth.vue'
+import { auth } from './includes/firebase'
+import { mapWritableState } from 'pinia'
+import useUserStore from '@/stores/User'
 
 export default {
   name: 'App',
   components: {
     AppHeader,
     AppAuth
+  },
+  computed: {
+    ...mapWritableState(useUserStore, ['userLoggedIn'])
+  },
+  created() {
+    if (auth.currentUser) {
+      this.userLoggedIn = true
+    }
   }
 }
 </script>
@@ -280,7 +291,7 @@ export default {
   </div>
 
   <!-- Auth Modal -->
-  <AppAuth />
+  <AppAuth v-show="!userLoggedIn" />
 </template>
 
 <style></style>

@@ -7,12 +7,20 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import VeeValidate from '@/includes/validation'
+import { auth } from './includes/firebase'
 
-const app = createApp(App)
+let app
 
-app.use(createPinia())
-app.use(router)
+auth.onAuthStateChanged(() => {
+  if (!app) {
+    console.log('hello')
+    app = createApp(App)
 
-app.use(VeeValidate)
+    app.use(createPinia())
+    app.use(router)
 
-app.mount('#app')
+    app.use(VeeValidate)
+
+    app.mount('#app')
+  }
+})

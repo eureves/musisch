@@ -1,4 +1,7 @@
 <script>
+import { mapActions } from 'pinia'
+import useUserStore from '@/stores/User'
+
 export default {
   name: 'loginForm',
   data() {
@@ -14,11 +17,23 @@ export default {
     }
   },
   methods: {
-    login() {
+    ...mapActions(useUserStore, ['authenticate']),
+    async login(values) {
       this.loginShowAlert = true
       this.loginInSubmission = true
       this.loginAlertVariant = 'bg-blue-500'
       this.loginAlertMsg = 'Please wait! We are loging you in.'
+
+      try {
+        await this.authenticate(values)
+      } catch (error) {
+        console.log(error)
+
+        this.loginInSubmission = false
+        this.loginAlertVariant = 'bg-red-500'
+        this.loginAlertMsg = 'An unexpected error occured. Please try again later'
+        return
+      }
 
       this.loginAlertVariant = 'bg-green-500'
       this.loginAlertMsg = 'Seccess! You are now logged in.'
