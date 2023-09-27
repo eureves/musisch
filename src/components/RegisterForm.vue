@@ -1,6 +1,13 @@
 <script>
+import { auth, usersCollection } from '@/includes/firebase'
+import { mapWritableState } from 'pinia'
+import useUserStore from '@/stores/User'
+
 export default {
   name: 'registerForm',
+  computed: {
+    ...mapWritableState(useUserStore, ['userLoggedIn'])
+  },
   data() {
     return {
       registerSchema: {
@@ -22,14 +29,48 @@ export default {
     }
   },
   methods: {
-    register() {
+    async register(values) {
       this.regShowAlert = true
       this.regInSubmission = true
       this.regAlertVariant = 'bg-blue-500'
       this.regAlertMsg = 'Please wait! Your account is being created.'
 
+      let userCreds = null
+
+      console.log(values)
+
+      try {
+        userCreds = await auth.createUserWithEmailAndPassword(values.email, values.password)
+      } catch (error) {
+        console.log(error)
+
+        this.regInSubmission = false
+        this.regAlertVariant = 'bg-red-500'
+        this.regAlertMsg = 'An unexpected error occured. Please try again latere'
+        return
+      }
+
+      try {
+        await usersCollection.add({
+          name: values.name,
+          email: values.email,
+          age: values.age,
+          country: values.country
+        })
+      } catch (error) {
+        console.log(error)
+
+        this.regInSubmission = false
+        this.regAlertVariant = 'bg-red-500'
+        this.regAlertMsg = 'An unexpected error occured. Please try again latere'
+        return
+      }
+
+      this.userLoggedIn = true
+
       this.regAlertVariant = 'bg-green-500'
       this.regAlertMsg = 'Success! Your account has been created.'
+      console.log(userCreds)
     }
   }
 }
