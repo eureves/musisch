@@ -38,12 +38,14 @@ export default {
       } catch (error) {
         console.log(error)
 
+        this.regShowAlert = false
         this.regInSubmission = false
         this.regAlertVariant = 'bg-red-500'
         this.regAlertMsg = 'An unexpected error occured. Please try again latere'
         return
       }
 
+      this.regInSubmission = false
       this.regAlertVariant = 'bg-green-500'
       this.regAlertMsg = 'Success! Your account has been created.'
     }

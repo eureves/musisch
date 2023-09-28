@@ -29,12 +29,14 @@ export default {
       } catch (error) {
         console.log(error)
 
+        this.loginShowAlert = false
         this.loginInSubmission = false
         this.loginAlertVariant = 'bg-red-500'
         this.loginAlertMsg = 'An unexpected error occured. Please try again later'
         return
       }
 
+      this.loginInSubmission = false
       this.loginAlertVariant = 'bg-green-500'
       this.loginAlertMsg = 'Seccess! You are now logged in.'
     }
