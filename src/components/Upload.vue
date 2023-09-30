@@ -1,8 +1,9 @@
 <script>
-import { storage, auth, songsCollection } from '@/includes/firebase'
+import { auth, songsCollection, storage } from '@/includes/firebase'
+
 export default {
   name: 'AppUpload',
-  props: ['addSong'],
+  props: ['addSong', 'foo'],
   data() {
     return {
       isDragOver: false,
@@ -35,8 +36,8 @@ export default {
         task.on(
           'state_change',
           (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            this.uploads[uploadId].currentProgress = progress
+            this.uploads[uploadId].currentProgress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
           },
           (error) => {
             this.uploads[uploadId].variant = 'bg-red-400'
@@ -85,8 +86,8 @@ export default {
     <div class="p-6">
       <!-- Upload Dropbox -->
       <div
-        class="w-full px-10 py-20 rounded text-center cursor-pointer border border-dashed border-gray-400 text-gray-400 transition duration-500 hover:text-white hover:bg-green-400 hover:border-green-400 hover:border-solid"
         :class="{ 'bg-green-400 border-green-400 border-solid': isDragOver }"
+        class="w-full px-10 py-20 rounded text-center cursor-pointer border border-dashed border-gray-400 text-gray-400 transition duration-500 hover:text-white hover:bg-green-400 hover:border-green-400 hover:border-solid"
         @drag.prevent.stop=""
         @dragstart.prevent.stop=""
         @dragend.prevent.stop="isDragOver = false"
@@ -97,20 +98,20 @@ export default {
       >
         <h5>Drop your files here</h5>
       </div>
-      <input type="file" multiple @change="upload($event)" />
+      <input multiple type="file" @change="upload($event)" />
       <hr class="my-6" />
       <!-- Progess Bars -->
-      <div class="mb-4" v-for="upload in uploads" :key="upload.name">
+      <div v-for="upload in uploads" :key="upload.name" class="mb-4">
         <!-- File Name -->
-        <div class="font-bold text-sm" :class="upload.textClass">
+        <div :class="upload.textClass" class="font-bold text-sm">
           <i :class="upload.icon" /> {{ upload.name }}
         </div>
         <div class="flex h-4 overflow-hidden bg-gray-200 rounded">
           <!-- Inner Progress Bar -->
           <div
-            class="transition-all progress-bar bg-blue-400"
             :class="upload.variant"
             :style="{ width: upload.currentProgress + '%' }"
+            class="transition-all progress-bar bg-blue-400"
           ></div>
         </div>
       </div>

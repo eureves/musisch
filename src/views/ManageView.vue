@@ -4,7 +4,7 @@ import { auth, songsCollection } from '@/includes/firebase'
 import CompositionItem from '@/components/CompositionItem.vue'
 
 export default {
-  name: 'AppManage',
+  name: 'ManageView',
   components: {
     AppUpload,
     CompositionItem
@@ -12,7 +12,8 @@ export default {
   data() {
     return {
       songsList: [],
-      unsavedFlag: false
+      unsavedFlag: false,
+      foo: true
     }
   },
   async created() {
@@ -56,7 +57,7 @@ export default {
   <section class="container mx-auto mt-6">
     <div class="md:grid md:grid-cols-3 md:gap-4">
       <div class="col-span-1">
-        <AppUpload :addSong="addSong" />
+        <AppUpload :addSong="addSong" :foo="foo"/>
       </div>
       <div class="col-span-2">
         <div class="bg-white rounded border border-gray-200 relative flex flex-col">
