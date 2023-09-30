@@ -1,7 +1,8 @@
 <script>
 import { auth, commentsCollection, songsCollection } from '@/includes/firebase'
-import { mapState } from 'pinia'
+import { mapState, mapActions } from 'pinia'
 import useUserStore from '@/stores/User'
+import usePlayerStore from '@/stores/Player'
 
 export default {
   name: 'SongView',
@@ -9,7 +10,7 @@ export default {
     ...mapState(useUserStore, ['userLoggedIn']),
     sortedComments() {
       return this.comments.slice().sort((a, b) => {
-        if (this.sort === '1') {
+        if (this.sort === 'new') {
           return new Date(b.datePosted) - new Date(a.datePosted)
         }
 
@@ -32,6 +33,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(usePlayerStore, ['newSong']),
     async submitComment(values, { resetForm }) {
       this.inSubmission = true
       this.showAlert = true
@@ -47,6 +49,12 @@ export default {
       }
 
       await commentsCollection.add(comment)
+
+      this.song.commentCount += 1
+      await songsCollection.doc(this.$route.params.id).update({
+        commentCount: this.song.commentCount
+      })
+
       await this.getComments()
 
       this.inSubmission = false
@@ -77,8 +85,23 @@ export default {
       return
     }
 
+    const { sort } = this.$route.query
+
+    this.sort = sort === 'new' || sort === 'old' ? sort : 'new'
+
     this.song = docSnapshot.data()
     await this.getComments()
+  },
+  watch: {
+    sort(newVal) {
+      if (newVal === this.$route.query.sort) return
+
+      this.$router.push({
+        query: {
+          sort: newVal
+        }
+      })
+    }
   }
 }
 </script>
@@ -95,6 +118,7 @@ export default {
       <button
         class="z-50 h-24 w-24 text-3xl bg-white text-black rounded-full focus:outline-none"
         type="button"
+        @click.prevent="newSong(this.song)"
       >
         <i class="fas fa-play"></i>
       </button>
@@ -110,7 +134,7 @@ export default {
     <div class="bg-white rounded border border-gray-200 relative flex flex-col">
       <div class="px-6 pt-6 pb-5 font-bold border-b border-gray-200">
         <!-- Comment Count -->
-        <span class="card-title">Comments (15)</span>
+        <span class="card-title">Comments ({{ song.commentCount }})</span>
         <i class="fa fa-comments float-right text-green-400 text-2xl"></i>
       </div>
       <div class="p-6">
@@ -142,8 +166,8 @@ export default {
           v-model="sort"
           class="block mt-4 py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
         >
-          <option value="1">Latest</option>
-          <option value="2">Oldest</option>
+          <option value="new">Latest</option>
+          <option value="old">Oldest</option>
         </select>
       </div>
     </div>
