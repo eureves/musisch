@@ -16,7 +16,7 @@ export default {
   >
     <div>
       <RouterLink
-        :to="{ name: 'song', params: { id: song.docId } }"
+        :to="{ name: 'song', params: { id: song.docId }, query: { sort: 'new' } }"
         class="font-bold block text-gray-600"
       >
         {{ song.modifiedName }}
@@ -25,10 +25,21 @@ export default {
     </div>
 
     <div class="text-gray-600 text-lg">
-      <span class="comments">
-        <i class="fa fa-comments text-gray-600"></i>
-        {{ song.commentCount }}
-      </span>
+      <RouterLink
+        v-slot="{ navigate }"
+        :to="{
+          name: 'song',
+          params: { id: song.docId },
+          query: { sort: 'new' },
+          hash: '#comments'
+        }"
+        custom
+      >
+        <span class="comments" @click="navigate">
+          <i class="fa fa-comments text-gray-600"></i>
+          {{ song.commentCount }}
+        </span>
+      </RouterLink>
     </div>
   </li>
 </template>

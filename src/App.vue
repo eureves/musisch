@@ -28,7 +28,7 @@ export default {
 <template>
   <AppHeader />
 
-  <RouterView />
+  <RouterView> </RouterView>
 
   <AppPlayer />
 
