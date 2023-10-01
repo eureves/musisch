@@ -92,46 +92,46 @@ export default {
       </button>
     </div>
     <div v-show="showForm">
-      <div class="text-white text-center font-bold p-4 mb-4" v-if="showAlert" :class="alertVariant">
+      <div v-if="showAlert" :class="alertVariant" class="text-white text-center font-bold p-4 mb-4">
         {{ alertMessage }}
       </div>
-      <VeeForm :validation-schema="schema" :initial-values="song" @submit="submitForm">
+      <VeeForm :initial-values="song" :validation-schema="schema" @submit="submitForm">
         <div class="mb-3">
-          <label class="inline-block mb-2">Song Title</label>
+          <label class="inline-block mb-2">{{ $t('composItem.songTitle') }}</label>
           <VeeField
-            type="text"
-            name="modifiedName"
             class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+            name="modifiedName"
             placeholder="Enter Song Title"
+            type="text"
           />
           <VeeError class="text-red-400" name="modifiedName" @click.prevent="deleteSong" />
         </div>
         <div class="mb-3">
-          <label class="inline-block mb-2">Genre</label>
+          <label class="inline-block mb-2">{{ $t('composItem.genre') }}</label>
           <VeeField
-            name="genre"
-            type="text"
             class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
+            name="genre"
             placeholder="Enter Genre"
+            type="text"
             @input="updateUnsavedFlag(true)"
           />
           <VeeError class="text-red-400" name="genre" />
         </div>
         <button
-          type="submit"
-          class="py-1.5 mr-3 px-3 rounded text-white bg-green-600"
           :disabled="inSubmission"
+          class="py-1.5 mr-3 px-3 rounded text-white bg-green-600"
+          type="submit"
         >
-          Submit
+          {{ $t('composItem.submit') }}
         </button>
         <button
-          type="button"
-          class="py-1.5 px-3 rounded text-white bg-gray-600"
-          @click.prevent="showForm = false"
-          @input="updateUnsavedFlag(true)"
           :disabled="inSubmission"
+          class="py-1.5 px-3 rounded text-white bg-gray-600"
+          type="button"
+          @input="updateUnsavedFlag(true)"
+          @click.prevent="showForm = false"
         >
-          Go Back
+          {{ $t('composItem.goBack') }}
         </button>
       </VeeForm>
     </div>

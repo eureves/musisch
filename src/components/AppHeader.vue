@@ -6,7 +6,10 @@ import useUserStore from '@/stores/User'
 export default {
   name: 'AppHeader',
   computed: {
-    ...mapStores(useModalStore, useUserStore)
+    ...mapStores(useModalStore, useUserStore),
+    currentLocale() {
+      return this.$i18n.locale === 'ru' ? 'Русский' : 'English'
+    }
   },
   methods: {
     toggleAuthModal() {
@@ -17,6 +20,9 @@ export default {
       this.userStore.signOut()
 
       if (this.$route.meta.requiredAuth) this.$router.push({ name: 'home' })
+    },
+    changeLocale() {
+      this.$i18n.locale = this.$i18n.locale === 'ru' ? 'en' : 'ru'
     }
   }
 }
@@ -28,8 +34,8 @@ export default {
     <nav class="container mx-auto flex justify-start items-center py-5 px-4">
       <!-- App Name -->
       <RouterLink
-        class="text-white font-bold uppercase text-2xl mr-4"
         :to="{ name: 'home' }"
+        class="text-white font-bold uppercase text-2xl mr-4"
         exact-active-class="no-active"
         >Music</RouterLink
       >
@@ -38,7 +44,7 @@ export default {
         <!-- Primary Navigation -->
         <ul class="flex flex-row mt-1">
           <li>
-            <RouterLink class="px-2 text-white" :to="{ name: 'about' }">About</RouterLink>
+            <RouterLink :to="{ name: 'about' }" class="px-2 text-white">About</RouterLink>
           </li>
           <!-- Navigation Links -->
           <li v-if="!userStore.userLoggedIn">
@@ -48,12 +54,19 @@ export default {
           </li>
           <template v-else>
             <li>
-              <RouterLink class="px-2 text-white" :to="{ name: 'manage' }">Manage</RouterLink>
+              <RouterLink :to="{ name: 'manage' }" class="px-2 text-white">Manage</RouterLink>
             </li>
             <li>
               <a class="px-2 text-white" href="#" @click.prevent="signOut">Log Out</a>
             </li>
           </template>
+        </ul>
+        <ul class="ml-auto">
+          <li>
+            <a class="px-2 text-white" href="#" @click.prevent="changeLocale">{{
+              currentLocale
+            }}</a>
+          </li>
         </ul>
       </div>
     </nav>

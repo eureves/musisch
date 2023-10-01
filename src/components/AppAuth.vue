@@ -44,7 +44,7 @@ export default {
         <div class="py-4 text-left px-6">
           <!--Title-->
           <div class="flex justify-between items-center pb-4">
-            <p class="text-2xl font-bold">Your Account</p>
+            <p class="text-2xl font-bold">{{ $t('authView.yourAccount') }}</p>
             <!-- Modal Close Button -->
             <div class="modal-close cursor-pointer z-50" @click="modalVisibility = false">
               <i class="fas fa-times"></i>
@@ -62,7 +62,7 @@ export default {
                 class="block rounded py-3 px-4 transition"
                 href="#"
                 @click.prevent="tab = 'login'"
-                >Login</a
+                >{{ $t('authView.login') }}</a
               >
             </li>
             <li class="flex-auto text-center">
@@ -74,7 +74,7 @@ export default {
                 class="block rounded py-3 px-4 transition"
                 href="#"
                 @click.prevent="tab = 'register'"
-                >Register</a
+                >{{ $t('authView.register') }}</a
               >
             </li>
           </ul>

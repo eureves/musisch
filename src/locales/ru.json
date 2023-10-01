@@ -1,0 +1,39 @@
+{
+  "homeView": {
+    "listen": "Слушайте хорошую музыку!",
+    "songs": "Песни"
+  },
+  "songView": {
+    "commentCount": "Нет комментариев | {n} комментарий | {n} комментария | {n} комментариев"
+  },
+  "authView": {
+    "yourAccount": "Ваш аккаунт",
+    "login": "Войти",
+    "register": "Зарегистрироваться"
+  },
+  "logRegForm": {
+    "name": "Имя",
+    "email": "Email",
+    "age": "Возраст",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "country": "Страна",
+    "submit": "Отправить",
+    "accept": "Принять {0}",
+    "tos": "Условия использования",
+    "enter": "Введите"
+  },
+  "manageView": {
+    "mySongs": "Мои песни"
+  },
+  "upload": {
+    "upload": "Загрузить",
+    "dropYourFilesHere": "Перетащите файлы сюда"
+  },
+  "composItem":{
+    "songTitle": "Название песни",
+    "genre": "Жанр",
+    "submit": "Отправить",
+    "goBack": "Назад"
+  }
+}

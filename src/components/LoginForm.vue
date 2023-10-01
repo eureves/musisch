@@ -39,6 +39,9 @@ export default {
       this.loginInSubmission = false
       this.loginAlertVariant = 'bg-green-500'
       this.loginAlertMsg = 'Seccess! You are now logged in.'
+    },
+    enterLocaleForm(val) {
+      return `${this.$t('logRegForm.enter')} ${val}`
     }
   }
 }
@@ -46,41 +49,41 @@ export default {
 
 <template>
   <div
-    class="text-white text-center font-bold p-4 rounded mb-4"
     v-show="loginShowAlert"
     :class="loginAlertVariant"
+    class="text-white text-center font-bold p-4 rounded mb-4"
   >
     {{ loginAlertMsg }}
   </div>
   <VeeForm :validation-schema="loginSchema" @submit="login">
     <!-- Email -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Email</label>
+      <label class="inline-block mb-2">{{ $t('logRegForm.email') }}</label>
       <VeeField
-        name="email"
+        :placeholder="enterLocaleForm($t('logRegForm.email'))"
         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
-        placeholder="Enter Email"
+        name="email"
         type="email"
       />
       <VeeError class="text-red-600" name="email" />
     </div>
     <!-- Password -->
     <div class="mb-3">
-      <label class="inline-block mb-2">Password</label>
+      <label class="inline-block mb-2">{{ $t('logRegForm.password') }}</label>
       <VeeField
-        name="password"
+        :placeholder="enterLocaleForm($t('logRegForm.password'))"
         class="block w-full py-1.5 px-3 text-gray-800 border border-gray-300 transition duration-500 focus:outline-none focus:border-black rounded"
-        placeholder="Password"
+        name="password"
         type="password"
       />
       <VeeError class="text-red-600" name="password" />
     </div>
     <button
-      class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
       :disabled="loginInSubmission"
+      class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
       type="submit"
     >
-      Submit
+      {{ $t('logRegForm.submit') }}
     </button>
   </VeeForm>
 </template>
