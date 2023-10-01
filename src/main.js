@@ -8,6 +8,7 @@ import App from './App.vue'
 import router from './router'
 import VeeValidate from '@/includes/validation'
 import { auth } from './includes/firebase'
+import Icon from '@/directives/icon'
 
 let app
 
@@ -20,6 +21,8 @@ auth.onAuthStateChanged(() => {
     app.use(router)
 
     app.use(VeeValidate)
+
+    app.directive('icon', Icon)
 
     app.mount('#app')
   }
