@@ -40,7 +40,7 @@ export default {
       this.loginAlertVariant = 'bg-green-500'
       this.loginAlertMsg = 'Seccess! You are now logged in.'
     },
-    enterLocaleForm(val) {
+   enterLocaleForm(val) {
       return `${this.$t('logRegForm.enter')} ${val}`
     }
   }
