@@ -10,6 +10,10 @@ import VeeValidate from '@/includes/validation'
 import { auth } from './includes/firebase'
 import Icon from '@/directives/icon'
 import i18n from '@/includes/i18n'
+import progressBar from './includes/progressBar'
+import 'nprogress/nprogress.css'
+
+progressBar(router)
 
 let app
 
