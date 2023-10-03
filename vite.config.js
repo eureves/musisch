@@ -1,4 +1,5 @@
 import { fileURLToPath, URL } from 'node:url'
+// import { visualizer } from 'rollup-plugin-visualizer'
 
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -29,6 +30,9 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,png,jpg}']
       }
     })
+    // visualizer({
+    //   open: true
+    // })
   ],
   resolve: {
     alias: {
