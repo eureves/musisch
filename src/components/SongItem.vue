@@ -12,13 +12,13 @@ export default {
 
 <template>
   <li
-    class="flex justify-between items-center p-3 pl-6 cursor-pointer transition duration-300 hover:bg-gray-50 example"
+    class="flex justify-between items-center p-3 pl-6 cursor-pointer transition duration-300 hover:bg-gray-50 example snapshot"
     :class="`song-id-${song.docId}`"
   >
     <div>
       <RouterLink
         :to="{ name: 'song', params: { id: song.docId }, query: { sort: 'new' } }"
-        class="font-bold block text-gray-600"
+        class="font-bold block text-gray-600 composition-name"
       >
         {{ song.modifiedName }}
       </RouterLink>
